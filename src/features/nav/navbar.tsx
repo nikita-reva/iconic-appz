@@ -10,7 +10,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
 
   return (
     <NavbarContainer
-      color={open ? 'var(--iconic-darkblue)' : 'var(--iconic-red)'}
+      bgColor={open ? 'var(--iconic-darkblue)' : 'var(--iconic-red)'}
       ref={clickOutsideRef}
       animate="visible"
     >

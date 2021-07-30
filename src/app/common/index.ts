@@ -1,1 +1,1 @@
-export { ClickOutsideDiv } from './ClickOutsideDiv/ClickOutsideDiv';
+export { ClickOutsideDiv } from './click-outside-div/click-outside-div';
