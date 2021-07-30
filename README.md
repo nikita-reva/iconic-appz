@@ -7,6 +7,7 @@ Tech stack:
 Desired features:
 - Visually appealing and fully responsive UI
 - Some cool animations and microinteractions
+- Great performance and short loading time
 - Authentication
 - Chat functionality
 - Blog functionality
