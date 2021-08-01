@@ -1,20 +1,71 @@
 import { useState } from 'react';
 import { useClickOutsideRef } from '../../app/hooks';
-import { NavbarContainer } from './navbar.styles';
+import {
+  barOneVariants,
+  barThreeVariants,
+  barTwoVariants,
+  hamburgerHover,
+  logoHover,
+  navbarVariants,
+} from './navbar.animations';
+import {
+  NavContainer,
+  Nav,
+  NavLink,
+  NavLogo,
+  NavElements,
+  NavElement,
+  Hamburger,
+  Bar,
+} from './navbar.styles';
 
 interface NavbarProps {}
 
 export const Navbar: React.FC<NavbarProps> = (props) => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const clickOutsideRef = useClickOutsideRef(() => setOpen(false));
 
   return (
-    <NavbarContainer
-      bgColor={open ? 'var(--iconic-darkblue)' : 'var(--iconic-red)'}
+    <NavContainer
       ref={clickOutsideRef}
+      bgColor={'var(--iconic-darkblue)'}
+      variants={navbarVariants}
+      initial="hidden"
       animate="visible"
     >
-      {open ? 'Open' : 'Not Open'}
-    </NavbarContainer>
+      <Nav>
+        <NavLink to="/">
+          <NavLogo whileHover={logoHover} src="/images/logo.png" />
+        </NavLink>
+        <NavElements>
+          <NavElement>
+            <NavLink to="/home">Home</NavLink>
+          </NavElement>
+          <NavElement>
+            <NavLink to="/team">Team</NavLink>
+          </NavElement>
+          <NavElement>
+            <NavLink to="/work">Work</NavLink>
+          </NavElement>
+          <NavElement>
+            <NavLink to="/blog">Blog</NavLink>
+          </NavElement>
+        </NavElements>
+        <Hamburger whileHover={hamburgerHover} onClick={() => setOpen(!open)}>
+          <Bar
+            variants={barOneVariants}
+            animate={open ? 'active' : 'inactive'}
+          />
+          <Bar
+            variants={barTwoVariants}
+            animate={open ? 'active' : 'inactive'}
+          />
+          <Bar
+            variants={barThreeVariants}
+            animate={open ? 'active' : 'inactive'}
+          />
+        </Hamburger>
+      </Nav>
+    </NavContainer>
   );
 };

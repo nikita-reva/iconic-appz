@@ -1,3 +1,14 @@
+import { ContentContainer, PageContainer } from '../../../common';
+
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return (
+    <>
+      <PageContainer>
+        <ContentContainer>Home Page</ContentContainer>
+      </PageContainer>
+      <PageContainer>
+        <ContentContainer>Home Page</ContentContainer>
+      </PageContainer>
+    </>
+  );
 };

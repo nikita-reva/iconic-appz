@@ -1,13 +1,9 @@
 import { Container } from './page-container.styles';
 
 interface PageContainerProps {
-  children: React.ReactNode;
-  width: string;
+  children?: React.ReactNode;
 }
 
-export const PageContainer: React.FC<PageContainerProps> = ({
-  children,
-  width,
-}) => {
-  return <Container width={width}>{children}</Container>;
+export const PageContainer: React.FC<PageContainerProps> = ({ children }) => {
+  return <Container>{children}</Container>;
 };

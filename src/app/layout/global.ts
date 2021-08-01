@@ -1,15 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Fjalla+One:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Courgette:ital,wght@0,400&display=swap');
-
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
     }
 
     :root {
@@ -31,5 +26,6 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background: var(--iconic-blue);
         overflow-x: hidden;
+        position: relative;
     }
 `;
