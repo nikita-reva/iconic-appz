@@ -1,5 +1,78 @@
-import { SocialMediaBarContainer } from './social-media-bar.styles';
+import { VscGithub } from 'react-icons/vsc';
+import { GrInstagram, GrLinkedinOption } from 'react-icons/gr';
+import { FiTwitter } from 'react-icons/fi';
 
-export const SocialMediaBar = () => {
-  return <SocialMediaBarContainer></SocialMediaBarContainer>;
+import {
+  IconContainer,
+  Beam,
+  SocialMediaBarContainer,
+  SocialMediaBarElements,
+  Reflection,
+} from './social-media-bar.styles';
+import { useAnimation } from 'framer-motion';
+import {
+  containerVariants,
+  beamVariants,
+  reflectionVariants,
+} from './social-media-bar.animations';
+
+interface SocialMediaBarProps {
+  beamColor?: string;
+}
+
+export const SocialMediaBar: React.FC<SocialMediaBarProps> = ({
+  beamColor,
+}) => {
+  const containerControls = useAnimation();
+  const beamControls = useAnimation();
+  const reflectionControls = useAnimation();
+
+  return (
+    <SocialMediaBarContainer
+      variants={containerVariants}
+      initial="initial"
+      animate={containerControls}
+      onHoverStart={(e) => {
+        containerControls.start('hoverStart');
+        beamControls.start('hoverStart');
+        reflectionControls.start('hoverStart');
+      }}
+      onHoverEnd={(e) => {
+        beamControls.start('hoverEnd');
+        containerControls.start('hoverEnd');
+        reflectionControls.start('hoverEnd');
+      }}
+    >
+      <Beam
+        beamColor={beamColor}
+        variants={beamVariants}
+        animate={beamControls}
+      />
+      <SocialMediaBarElements>
+        <Reflection
+          variants={reflectionVariants}
+          initial={'initial'}
+          animate={reflectionControls}
+        />
+        <IconContainer href="https://github.com/nikita-reva" target="_blank">
+          <VscGithub />
+        </IconContainer>
+        <IconContainer
+          href="https://www.linkedin.com/in/niko-reva-291275169/"
+          target="_blank"
+        >
+          <GrLinkedinOption />
+        </IconContainer>
+        <IconContainer
+          href="https://www.instagram.com/iconicappz/"
+          target="_blank"
+        >
+          <GrInstagram />
+        </IconContainer>
+        <IconContainer href="https://twitter.com/NiketasR" target="_blank">
+          <FiTwitter />
+        </IconContainer>
+      </SocialMediaBarElements>
+    </SocialMediaBarContainer>
+  );
 };

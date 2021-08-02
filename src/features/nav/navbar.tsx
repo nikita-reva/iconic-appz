@@ -39,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
         </NavLink>
         <NavElements>
           <NavElement>
-            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/">Home</NavLink>
           </NavElement>
           <NavElement>
             <NavLink to="/team">Team</NavLink>
