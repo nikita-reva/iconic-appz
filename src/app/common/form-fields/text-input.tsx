@@ -1,3 +1,4 @@
+import { useField } from 'formik';
 import styled from 'styled-components';
 import {
   FormFieldContainer,
@@ -16,21 +17,12 @@ interface TextInputProps {
   placeholder?: string;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({
-  name,
-  label,
-  type,
-  placeholder,
-}) => {
+export const TextInput: React.FC<TextInputProps> = ({ label, ...props }) => {
+  const [field, meta] = useField(props);
   return (
     <FormFieldContainer>
       <FormFieldLabel>{label}</FormFieldLabel>
-      <Input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        autoComplete="none"
-      />
+      <Input {...field} {...props} autoComplete="none" />
     </FormFieldContainer>
   );
 };

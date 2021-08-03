@@ -9,5 +9,5 @@ export const FooterContainer = styled.div`
 export const FooterContent = styled.footer`
   width: 80%;
   margin: 0 auto;
-  padding: 24px 0;
+  padding: 64px 0;
 `;

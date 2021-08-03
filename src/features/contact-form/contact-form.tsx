@@ -1,22 +1,57 @@
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
+import emailjs from 'emailjs-com';
+
 import {
+  ButtonContainer,
   ContactFormContainer,
   ContactFormHeading,
 } from './contact-form.styles';
-import * as Yup from 'yup';
 import { TextInput, TextArea, HiddenInput } from '../../app/common/form-fields';
+import { GlassButton } from '../../app/components/GlassButton';
+
+interface FormValues {
+  name: string;
+  company: string;
+  email: string;
+  message: string;
+}
 
 export const ContactForm = () => {
+  const sendEmail = (values: any) => {
+    emailjs
+      .send(
+        'service_do95f1d',
+        'template_nxwok15',
+        values,
+        'user_JsusNz0E8HNccYZdyYeKy'
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
+
   return (
     <Formik
       initialValues={{ name: '', company: '', email: '', message: '' }}
       validationSchema={Yup.object({
         name: Yup.string().required(),
-        company: Yup.string(),
+        company: Yup.string().required(),
         email: Yup.string().required().email(),
-        password: Yup.string().required(),
+        message: Yup.string().required(),
       })}
-      onSubmit={async (values, { setSubmitting, setErrors }) => {}}
+      onSubmit={(
+        values: FormValues,
+        { setSubmitting, setErrors }: FormikHelpers<FormValues>
+      ) => {
+        sendEmail(values);
+        console.log(values);
+      }}
     >
       {({ isSubmitting, isValid, dirty, errors }) => (
         <ContactFormContainer autoComplete="none">
@@ -45,6 +80,13 @@ export const ContactForm = () => {
             placeholder="Enter your message..."
           />
           <HiddenInput />
+          <ButtonContainer>
+            <GlassButton
+              type="submit"
+              beamColor="var(--iconic-paleblue)"
+              content="Send"
+            />
+          </ButtonContainer>
         </ContactFormContainer>
       )}
     </Formik>

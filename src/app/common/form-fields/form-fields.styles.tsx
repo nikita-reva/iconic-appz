@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 export const FormFieldContainer = styled.div`
   width: 100%;
-  padding: 4px 8px;
 `;
 
 export const FormFieldLabel = styled.label`
