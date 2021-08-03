@@ -29,9 +29,9 @@ export const beamVariants = {
     boxShadow:
       'box-shadow: 0 0 5px var(--beam-color), 0 0 15px var(--beam-color), 0 0 30px var(--beam-color), 0 0 45px var(--beam-color)',
     transition: {
-      type: 'spring',
+      type: 'tween',
       duration: 0.5,
-      bounce: 0.8,
+      ease: 'easeOut',
       delay: 0.5,
     },
   },

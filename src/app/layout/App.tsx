@@ -5,6 +5,7 @@ import './fonts.css';
 import Navbar from '../../features/nav';
 import { HomePage } from './pages';
 import SocialMediaBar from '../../features/social-media-bar';
+import Footer from '../../features/footer';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>
+      <Footer />
     </Fragment>
   );
 };

@@ -15,6 +15,7 @@ import {
   beamVariants,
   reflectionVariants,
 } from './social-media-bar.animations';
+import { useClickOutsideRef } from '../../app/hooks';
 
 interface SocialMediaBarProps {
   beamColor?: string;
@@ -26,9 +27,15 @@ export const SocialMediaBar: React.FC<SocialMediaBarProps> = ({
   const containerControls = useAnimation();
   const beamControls = useAnimation();
   const reflectionControls = useAnimation();
+  const clickOutsideRef = useClickOutsideRef(() => {
+    beamControls.start('hoverEnd');
+    containerControls.start('hoverEnd');
+    reflectionControls.start('hoverEnd');
+  });
 
   return (
     <SocialMediaBarContainer
+      ref={clickOutsideRef}
       variants={containerVariants}
       initial="initial"
       animate={containerControls}
@@ -41,6 +48,11 @@ export const SocialMediaBar: React.FC<SocialMediaBarProps> = ({
         beamControls.start('hoverEnd');
         containerControls.start('hoverEnd');
         reflectionControls.start('hoverEnd');
+      }}
+      onTap={(e) => {
+        containerControls.start('hoverStart');
+        beamControls.start('hoverStart');
+        reflectionControls.start('hoverStart');
       }}
     >
       <Beam
