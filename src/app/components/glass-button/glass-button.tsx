@@ -3,7 +3,7 @@ import {
   GlassButtonLink,
   GlassButtonBtn,
   GlassButtonProps,
-} from './GlassButton.styles';
+} from './glass-button.styles';
 
 export const GlassButton: React.FC<GlassButtonProps> = ({
   onClick,
@@ -11,13 +11,16 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
   beamColor,
   type,
   content,
+  disabled,
 }) => {
   return (
-    <GlassButtonContainer beamColor={beamColor}>
+    <GlassButtonContainer
+      beamColor={disabled ? 'var(--iconic-red)' : beamColor}
+    >
       {linkTo ? (
         <GlassButtonLink to={linkTo}>Read More</GlassButtonLink>
       ) : (
-        <GlassButtonBtn onClick={onClick} type={type}>
+        <GlassButtonBtn onClick={onClick} type={type} disabled={disabled}>
           {content ? content : 'Click'}
         </GlassButtonBtn>
       )}

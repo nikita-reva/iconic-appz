@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
     >
       <Nav>
         <NavLink to="/">
-          <NavLogo whileHover={logoHover} src="/images/logo.png" />
+          <NavLogo whileHover={logoHover} src="/assets/logo.png" />
         </NavLink>
         <NavElements>
           <NavElement>

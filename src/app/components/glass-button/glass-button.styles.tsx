@@ -9,6 +9,7 @@ export interface GlassButtonProps {
   beamColor?: string;
   type?: Btn;
   content?: string;
+  disabled?: boolean;
 }
 
 export const GlassButtonContainer = styled.div<GlassButtonProps>`

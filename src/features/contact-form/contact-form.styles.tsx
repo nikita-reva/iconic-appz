@@ -1,5 +1,6 @@
 import { Form } from 'formik';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const ContactFormHeading = styled.h2`
   width: 100%;
@@ -20,6 +21,6 @@ export const ContactFormContainer = styled(Form)`
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled(motion.div)`
   margin-top: 36px;
 `;

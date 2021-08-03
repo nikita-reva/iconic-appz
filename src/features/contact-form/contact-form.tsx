@@ -8,7 +8,8 @@ import {
   ContactFormHeading,
 } from './contact-form.styles';
 import { TextInput, TextArea, HiddenInput } from '../../app/common/form-fields';
-import { GlassButton } from '../../app/components/GlassButton';
+import { GlassButton } from '../../app/components/glass-button';
+import { useAnimation } from 'framer-motion';
 
 interface FormValues {
   name: string;
@@ -17,7 +18,20 @@ interface FormValues {
   message: string;
 }
 
+const buttonVariants = {
+  disappear: {
+    scale: [1, 0.8, 1.1, 1],
+    transition: {
+      type: 'spring',
+      duration: 0.8,
+      bounce: 1,
+    },
+  },
+};
+
 export const ContactForm = () => {
+  const buttonControls = useAnimation();
+
   const sendEmail = (values: any) => {
     emailjs
       .send(
@@ -45,12 +59,19 @@ export const ContactForm = () => {
         email: Yup.string().required().email(),
         message: Yup.string().required(),
       })}
-      onSubmit={(
+      onSubmit={async (
         values: FormValues,
-        { setSubmitting, setErrors }: FormikHelpers<FormValues>
+        { setSubmitting, setErrors, resetForm }: FormikHelpers<FormValues>
       ) => {
-        sendEmail(values);
-        console.log(values);
+        try {
+          await sendEmail(values);
+          setSubmitting(false);
+          buttonControls.start('disappear');
+          resetForm({});
+        } catch (error) {
+          setErrors(error.message);
+          setSubmitting(false);
+        }
       }}
     >
       {({ isSubmitting, isValid, dirty, errors }) => (
@@ -80,9 +101,10 @@ export const ContactForm = () => {
             placeholder="Enter your message..."
           />
           <HiddenInput />
-          <ButtonContainer>
+          <ButtonContainer variants={buttonVariants} animate={buttonControls}>
             <GlassButton
               type="submit"
+              disabled={!isValid || !dirty || isSubmitting}
               beamColor="var(--iconic-paleblue)"
               content="Send"
             />

@@ -8,6 +8,7 @@ import {
   FormFieldLabel,
   CommonStyles,
 } from './form-fields.styles';
+import { ErrorMessage } from './error-message';
 
 const TextAreaWrapper = styled.div`
   position: relative;
@@ -111,6 +112,8 @@ export const TextArea: React.FC<TextAreaProps> = ({ label, ...props }) => {
           </RowButton>
         </RowsControls>
       </TextAreaWrapper>
+      {meta.error &&
+        (meta.touched ? <ErrorMessage content={meta.error} /> : null)}
     </FormFieldContainer>
   );
 };

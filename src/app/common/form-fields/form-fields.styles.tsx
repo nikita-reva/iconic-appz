@@ -2,11 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const FormFieldContainer = styled.div`
   width: 100%;
+  margin: 4px;
 `;
 
 export const FormFieldLabel = styled.label`
   color: var(--iconic-blue);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   letter-spacing: 0.2px;
   font-size: 1rem;
   font-weight: 500;
