@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import './fonts.css';
+import './global.css';
 import Navbar from '../../features/nav';
 import { BlogPage, HomePage, TeamPage, WorkPage } from './pages';
 import SocialMediaBar from '../../features/social-media-bar';

@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+:root {
+  --iconic-red: #c65647;
+  --iconic-pink: #ee7d76;
+  --iconic-blue: #227da1;
+  --iconic-darkblue: #1e3b44;
+  --iconic-lightblue: #2da4d3;
+  --iconic-paleblue: #70bcdb;
+  --iconic-green: #1eba90;
+  --iconic-turquoise: #26e7eb;
+  --iconic-yellow: #e2a440;
+  --iconic-orange: #f07637;
+  --iconic-darkorange: #d46442;
+  --iconic-lightorange: #d4842c;
+}
+
+body {
+  background: var(--iconic-blue);
+  overflow-x: hidden;
+  position: relative;
+}

@@ -4,6 +4,7 @@ import emailjs from 'emailjs-com';
 
 import {
   ButtonContainer,
+  Feedback,
   ContactFormContainer,
   ContactFormHeading,
 } from './contact-form.styles';
@@ -19,7 +20,7 @@ interface FormValues {
 }
 
 const buttonVariants = {
-  disappear: {
+  confirm: {
     scale: [1, 0.8, 1.1, 1],
     transition: {
       type: 'spring',
@@ -29,8 +30,27 @@ const buttonVariants = {
   },
 };
 
+const feedbackVariants = {
+  initial: { opacity: 0, y: 24 },
+  appear: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.2,
+    },
+  },
+  disappear: {
+    opacity: 0,
+    y: 24,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
 export const ContactForm = () => {
   const buttonControls = useAnimation();
+  const feedbackControls = useAnimation();
 
   const sendEmail = (values: any) => {
     emailjs
@@ -42,6 +62,12 @@ export const ContactForm = () => {
       )
       .then(
         (result) => {
+          feedbackControls.start('appear');
+
+          setTimeout(() => {
+            feedbackControls.start('disappear');
+          }, 3000);
+
           console.log(result.text);
         },
         (error) => {
@@ -66,7 +92,7 @@ export const ContactForm = () => {
         try {
           await sendEmail(values);
           setSubmitting(false);
-          buttonControls.start('disappear');
+          buttonControls.start('confirm');
           resetForm({});
         } catch (error) {
           setErrors(error.message);
@@ -102,6 +128,13 @@ export const ContactForm = () => {
           />
           <HiddenInput />
           <ButtonContainer variants={buttonVariants} animate={buttonControls}>
+            <Feedback
+              initial="initial"
+              variants={feedbackVariants}
+              animate={feedbackControls}
+            >
+              Message sent!
+            </Feedback>
             <GlassButton
               type="submit"
               disabled={!isValid || !dirty || isSubmitting}

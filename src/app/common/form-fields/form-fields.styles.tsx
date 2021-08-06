@@ -42,4 +42,8 @@ export const CommonStyles = css`
   &:focus::placeholder {
     color: transparent;
   }
+
+  &:invalid {
+    border: 1px solid var(--iconic-darkorange);
+  }
 `;

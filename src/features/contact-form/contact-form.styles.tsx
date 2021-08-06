@@ -22,5 +22,16 @@ export const ContactFormContainer = styled(Form)`
 `;
 
 export const ButtonContainer = styled(motion.div)`
-  margin-top: 36px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Feedback = styled(motion.div)`
+  width: 100%;
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: 'Kaushan Script', sans-serif;
+  color: var(--iconic-green);
 `;

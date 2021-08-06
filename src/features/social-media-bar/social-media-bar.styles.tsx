@@ -9,7 +9,7 @@ export const SocialMediaBarContainer = styled(motion.div)`
   top: 50vh;
   right: 0px;
   width: 60px;
-  height: 240px;
+  height: auto;
   border-radius: 12px 0 0 12px;
   display: flex;
   justify-content: center;
@@ -72,5 +72,6 @@ export const IconContainer = styled(motion.a).attrs(() => ({
   color: #fff;
   font-size: 2rem;
   cursor: pointer;
+  margin: 8px 0px;
   text-decoration: none;
 `;
