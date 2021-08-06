@@ -5,6 +5,7 @@ import {
   PageContainer,
 } from '../../../common';
 import IconicButton from '../../../components/iconic-button';
+import ImageSlider from '../../../components/image-slider';
 
 export const HomePage = () => {
   const [loading, setLoading] = useState(false);
@@ -54,7 +55,9 @@ export const HomePage = () => {
         </BackgroundContainer>
       </PageContainer>
       <PageContainer>
-        <ContentContainer>Home Page</ContentContainer>
+        <ContentContainer>
+          <ImageSlider />
+        </ContentContainer>
       </PageContainer>
     </>
   );

@@ -1,6 +1,7 @@
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import emailjs from 'emailjs-com';
+import { useAnimation } from 'framer-motion';
 
 import {
   ButtonContainer,
@@ -8,9 +9,9 @@ import {
   ContactFormContainer,
   ContactFormHeading,
 } from './contact-form.styles';
+import { buttonVariants, feedbackVariants } from './contact-form.animations';
 import { TextInput, TextArea, HiddenInput } from '../../app/common/form-fields';
 import { GlassButton } from '../../app/components/glass-button';
-import { useAnimation } from 'framer-motion';
 
 interface FormValues {
   name: string;
@@ -18,35 +19,6 @@ interface FormValues {
   email: string;
   message: string;
 }
-
-const buttonVariants = {
-  confirm: {
-    scale: [1, 0.8, 1.1, 1],
-    transition: {
-      type: 'spring',
-      duration: 0.8,
-      bounce: 1,
-    },
-  },
-};
-
-const feedbackVariants = {
-  initial: { opacity: 0, y: 24 },
-  appear: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1.2,
-    },
-  },
-  disappear: {
-    opacity: 0,
-    y: 24,
-    transition: {
-      duration: 0.8,
-    },
-  },
-};
 
 export const ContactForm = () => {
   const buttonControls = useAnimation();
@@ -102,7 +74,7 @@ export const ContactForm = () => {
     >
       {({ isSubmitting, isValid, dirty, errors }) => (
         <ContactFormContainer autoComplete="none">
-          <ContactFormHeading>Send me a Message</ContactFormHeading>
+          <ContactFormHeading>Send us a Message</ContactFormHeading>
           <TextInput
             name="name"
             label="Name"
