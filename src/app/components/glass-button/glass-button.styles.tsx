@@ -75,6 +75,10 @@ const ButtonStyles = css`
   transition: 0.5s;
   backdrop-filter: blur(15px);
 
+  &:focus {
+    outline: none;
+  }
+
   &:before {
     content: '';
     position: absolute;

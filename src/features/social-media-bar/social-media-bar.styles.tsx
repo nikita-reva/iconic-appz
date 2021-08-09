@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { iconHover } from './social-media-bar.animations';
 
 export const SocialMediaBarContainer = styled(motion.div)`
-  --beam-color: var(--iconic-paleblue);
   position: fixed;
   top: 50vh;
   right: 0px;
@@ -14,6 +13,7 @@ export const SocialMediaBarContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2000;
 `;
 
 interface BeamProps {

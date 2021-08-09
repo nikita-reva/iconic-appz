@@ -39,7 +39,7 @@ export const beamVariants = {
     left: -12,
     height: 60,
     width: 24,
-    borderRadius: '30px',
+    borderRadius: '8px',
   },
 };
 

@@ -1,7 +1,5 @@
-import { useAnimation } from 'framer-motion';
-
-import { useEffect, useState } from 'react';
-import { useRef } from 'react';
+import { AnimateSharedLayout, PanInfo, useAnimation } from 'framer-motion';
+import { useEffect, useState, useRef, Fragment } from 'react';
 import { CgArrowRightR, CgArrowLeftR } from 'react-icons/cg';
 
 import {
@@ -9,6 +7,7 @@ import {
   ImagesContainer,
   ImagesCounterContainer,
   ImagesCounterElement,
+  ImagesCounterElementOutline,
   ImageSliderContainer,
   NextImage,
   PreviousImage,
@@ -24,14 +23,46 @@ const images = [
 
 export const ImageSlider: React.FC<ImageSliderProps> = () => {
   const imagesControls = useAnimation();
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [imageWidth, setImageWidth] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [hovered, setHovered] = useState<boolean>(false);
+
+  const switchImage = (direction: number, index: number = 0) => {
+    switch (direction) {
+      case 0:
+        setCurrentIndex(index);
+        return imagesControls.start({
+          x: -imageWidth * index,
+          transition: { type: 'spring', duration: 0.8, bounce: 0.2 },
+        });
+
+      case -1:
+        if (currentIndex === 0) return;
+        setCurrentIndex(currentIndex - 1);
+        return imagesControls.start({
+          x: -imageWidth * (currentIndex - 1),
+          transition: { type: 'spring', duration: 0.8, bounce: 0.3 },
+        });
+
+      case 1:
+        if (currentIndex >= images.length - 1) return;
+        setCurrentIndex(currentIndex + 1);
+        return imagesControls.start({
+          x: -imageWidth * (currentIndex + 1),
+          transition: { type: 'spring', duration: 0.8, bounce: 0.3 },
+        });
+      default:
+        return;
+    }
+  };
 
   useEffect(() => {
     const resizeHandler = () => {
       setImageWidth(
-        imageRef.current?.clientWidth ? imageRef.current?.clientWidth : 0
+        containerRef.current?.clientWidth
+          ? containerRef.current?.clientWidth
+          : 0
       );
       imagesControls.start({
         x: -imageWidth * currentIndex,
@@ -42,37 +73,43 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
     window.addEventListener('resize', resizeHandler);
 
     return () => window.removeEventListener('resize', resizeHandler);
-  }, [imageRef.current?.clientWidth, imageWidth, currentIndex, imagesControls]);
+  }, [
+    containerRef.current?.clientWidth,
+    imageWidth,
+    currentIndex,
+    imagesControls,
+  ]);
 
-  const switchImage = (direction: number) => {
-    switch (direction) {
-      case -1:
-        return imagesControls.start({
-          x: -imageWidth * (currentIndex - 1),
-          transition: { type: 'spring', duration: 1, bounce: 0.5 },
-        });
-
-      case 1:
-        return imagesControls.start({
-          x: -imageWidth * (currentIndex + 1),
-          transition: { type: 'spring', duration: 1, bounce: 0.5 },
-        });
-      default:
-        return;
+  const keyHandler = (event: any) => {
+    if (hovered) {
+      if (event.code === 'ArrowRight') switchImage(1);
+      if (event.code === 'ArrowLeft') switchImage(-1);
     }
   };
 
-  const moveToSelectedImage = (index: number) => {
-    setCurrentIndex(index);
-    imagesControls.start({
-      x: -imageWidth * index,
-      transition: { type: 'spring', duration: 1, bounce: 0.5 },
-    });
+  document.onkeydown = keyHandler;
+
+  const onPanEnd = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    info.velocity.x > 0 ? switchImage(-1) : switchImage(1);
   };
 
   return (
-    <ImageSliderContainer ref={imageRef}>
-      <ImagesContainer animate={imagesControls} layout>
+    <ImageSliderContainer
+      ref={containerRef}
+      onPanEnd={onPanEnd}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+    >
+      <ImagesContainer
+        animate={imagesControls}
+        layout
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.1}
+      >
         {images.map((image, index) => (
           <Image
             key={index}
@@ -83,8 +120,6 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
       </ImagesContainer>
       <PreviousImage
         onClick={() => {
-          if (currentIndex === 0) return;
-          setCurrentIndex(currentIndex - 1);
           switchImage(-1);
         }}
       >
@@ -92,21 +127,31 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
       </PreviousImage>
       <NextImage
         onClick={() => {
-          if (currentIndex === images.length - 1) return;
-          setCurrentIndex(currentIndex + 1);
           switchImage(1);
         }}
       >
         <CgArrowRightR />
       </NextImage>
       <ImagesCounterContainer>
-        {images.map((image, index) => (
-          <ImagesCounterElement
-            $width={imageWidth}
-            key={index}
-            onClick={() => moveToSelectedImage(index)}
-          />
-        ))}
+        <AnimateSharedLayout>
+          {images.map((image, index) => (
+            <Fragment key={index}>
+              <ImagesCounterElement
+                $width={imageWidth}
+                onClick={() => switchImage(0, index)}
+              >
+                {index === currentIndex && (
+                  <ImagesCounterElementOutline
+                    $width={imageWidth}
+                    layoutId="outline"
+                    initial={false}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </ImagesCounterElement>
+            </Fragment>
+          ))}
+        </AnimateSharedLayout>
       </ImagesCounterContainer>
     </ImageSliderContainer>
   );

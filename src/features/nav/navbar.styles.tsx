@@ -16,7 +16,16 @@ export const NavContainer = styled(motion.div)<NavbarContainerProps>`
 `;
 
 export const Nav = styled.nav`
-  width: 80%;
+  width: 88%;
+
+  @media screen and (min-width: 601px) {
+    width: 80%;
+  }
+
+  @media screen and (min-width: 1201px) {
+    width: 60%;
+  }
+
   height: 100%;
   margin: 0 auto;
   display: flex;

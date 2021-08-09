@@ -5,6 +5,14 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  width: ${({ width }) => (width ? width : '80%')};
   margin: 0 auto;
+  width: ${({ width }) => (width ? width : '88%')};
+
+  @media screen and (min-width: 601px) {
+    width: ${({ width }) => (width ? width : '80%')};
+  }
+
+  @media screen and (min-width: 1201px) {
+    width: ${({ width }) => (width ? width : '60%')};
+  }
 `;

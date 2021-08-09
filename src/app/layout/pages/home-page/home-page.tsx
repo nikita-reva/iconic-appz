@@ -57,6 +57,7 @@ export const HomePage = () => {
       <PageContainer>
         <ContentContainer>
           <ImageSlider />
+          <ImageSlider />
         </ContentContainer>
       </PageContainer>
     </>

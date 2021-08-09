@@ -15,10 +15,6 @@ export const ContactFormContainer = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media screen and (min-width: 992px) {
-    width: 60vw;
-  }
 `;
 
 export const ButtonContainer = styled(motion.div)`
