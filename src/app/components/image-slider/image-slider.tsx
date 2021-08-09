@@ -13,7 +13,10 @@ import {
   PreviousImage,
 } from './image-slider-styles';
 
-interface ImageSliderProps {}
+interface ImageSliderProps {
+  aspectRatio?: number;
+  rounded?: boolean;
+}
 
 const images = [
   '/assets/images/img1.jpg',
@@ -21,13 +24,42 @@ const images = [
   '/assets/images/img3.jpg',
 ];
 
-export const ImageSlider: React.FC<ImageSliderProps> = () => {
+export const ImageSlider: React.FC<ImageSliderProps> = ({
+  aspectRatio = 0,
+  rounded = false,
+}) => {
   const imagesControls = useAnimation();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [imageWidth, setImageWidth] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
 
+  // Handling resize
+  useEffect(() => {
+    const resizeHandler = () => {
+      setImageWidth(
+        containerRef.current?.clientWidth
+          ? containerRef.current?.clientWidth
+          : 0
+      );
+      setCurrentIndex(0);
+      imagesControls.start({
+        x: -imageWidth * currentIndex,
+        transition: { type: 'tween', duration: 0 },
+      });
+    };
+
+    window.addEventListener('resize', resizeHandler);
+
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, [
+    containerRef.current?.clientWidth,
+    imageWidth,
+    currentIndex,
+    imagesControls,
+  ]);
+
+  // Slide navigation
   const switchImage = (direction: number, index: number = 0) => {
     switch (direction) {
       case 0:
@@ -57,38 +89,16 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
     }
   };
 
-  useEffect(() => {
-    const resizeHandler = () => {
-      setImageWidth(
-        containerRef.current?.clientWidth
-          ? containerRef.current?.clientWidth
-          : 0
-      );
-      imagesControls.start({
-        x: -imageWidth * currentIndex,
-        transition: { type: 'tween', duration: 0 },
-      });
-    };
-
-    window.addEventListener('resize', resizeHandler);
-
-    return () => window.removeEventListener('resize', resizeHandler);
-  }, [
-    containerRef.current?.clientWidth,
-    imageWidth,
-    currentIndex,
-    imagesControls,
-  ]);
-
+  // Keyboard controls
   const keyHandler = (event: any) => {
     if (hovered) {
       if (event.code === 'ArrowRight') switchImage(1);
       if (event.code === 'ArrowLeft') switchImage(-1);
     }
   };
-
   document.onkeydown = keyHandler;
 
+  // Touch controls
   const onPanEnd = (
     event: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
@@ -102,6 +112,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
       onPanEnd={onPanEnd}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      $rounded={rounded}
     >
       <ImagesContainer
         animate={imagesControls}
@@ -115,6 +126,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = () => {
             key={index}
             onLoad={(e) => setImageWidth(e.currentTarget.clientWidth)}
             src={image}
+            $heigth={imageWidth * (1 / aspectRatio)}
           />
         ))}
       </ImagesContainer>

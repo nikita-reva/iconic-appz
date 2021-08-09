@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
-export const ImageSliderContainer = styled(motion.div)`
+export const ImageSliderContainer = styled(motion.div)<{ $rounded?: boolean }>`
   width: 100%;
   overflow: hidden;
   position: relative;
-  border-radius: 8px;
+  border-radius: ${({ $rounded }) => ($rounded ? '12px' : 0)};
   background: var(--iconic-darkblue);
   touch-action: none;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
@@ -19,8 +19,9 @@ export const ImagesContainer = styled(motion.div)`
   will-change: transform;
 `;
 
-export const Image = styled(motion.img)`
+export const Image = styled(motion.img)<{ $heigth?: number }>`
   width: 100%;
+  height: ${({ $heigth }) => ($heigth ? `${$heigth}px` : 'auto')};
   object-fit: cover;
 `;
 

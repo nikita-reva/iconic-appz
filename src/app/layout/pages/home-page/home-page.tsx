@@ -56,8 +56,7 @@ export const HomePage = () => {
       </PageContainer>
       <PageContainer>
         <ContentContainer>
-          <ImageSlider />
-          <ImageSlider />
+          <ImageSlider rounded />
         </ContentContainer>
       </PageContainer>
     </>
