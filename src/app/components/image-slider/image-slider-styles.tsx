@@ -27,6 +27,7 @@ export const ImagesCounterElement = styled(motion.div)<{ $width: number }>`
   height: ${({ $width }) => `${0.02 * $width}px`};
   width: ${({ $width }) => `${0.02 * $width}px`};
   background: var(--iconic-blue);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
   transition: background 0.2s ease-in;
 
   @media (hover: hover) and (pointer: fine) {
