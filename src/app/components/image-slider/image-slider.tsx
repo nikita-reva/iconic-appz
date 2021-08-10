@@ -120,7 +120,10 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
   };
 
   return (
-    <ImagesSliderWrapper>
+    <ImagesSliderWrapper
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+    >
       {images.length > 1 && (
         <ImagesCounterContainer>
           <AnimateSharedLayout>
@@ -152,8 +155,6 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
       <ImageSliderContainer
         ref={containerRef}
         onPanEnd={onPanEnd}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
         $rounded={rounded}
       >
         <ImagesContainer
