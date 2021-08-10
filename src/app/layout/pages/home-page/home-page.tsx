@@ -7,6 +7,12 @@ import {
 import IconicButton from '../../../components/iconic-button';
 import ImageSlider from '../../../components/image-slider';
 
+const images = [
+  '/assets/images/img1.jpg',
+  '/assets/images/img2.jpg',
+  '/assets/images/img3.jpg',
+];
+
 export const HomePage = () => {
   const [loading, setLoading] = useState(false);
 
@@ -56,7 +62,7 @@ export const HomePage = () => {
       </PageContainer>
       <PageContainer>
         <ContentContainer>
-          <ImageSlider rounded />
+          <ImageSlider images={images} rounded autoSlide />
         </ContentContainer>
       </PageContainer>
     </>

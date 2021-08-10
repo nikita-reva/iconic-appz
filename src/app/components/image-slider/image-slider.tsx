@@ -9,30 +9,43 @@ import {
   ImagesCounterElement,
   ImagesCounterElementOutline,
   ImageSliderContainer,
+  ImagesSliderWrapper,
   NextImage,
   PreviousImage,
 } from './image-slider-styles';
 
 interface ImageSliderProps {
+  images: string[];
   aspectRatio?: number;
   rounded?: boolean;
+  autoSlide?: boolean;
 }
 
-const images = [
-  '/assets/images/img1.jpg',
-  '/assets/images/img2.jpg',
-  '/assets/images/img3.jpg',
-];
-
 export const ImageSlider: React.FC<ImageSliderProps> = ({
+  images = [],
   aspectRatio = 0,
   rounded = false,
+  autoSlide = false,
 }) => {
   const imagesControls = useAnimation();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [imageWidth, setImageWidth] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [hovered, setHovered] = useState<boolean>(false);
+
+  // Handle auto slide
+  useEffect(() => {
+    if (autoSlide && images.length > 1) {
+      const interval = setInterval(() => {
+        switchImage(1);
+        if (currentIndex === images.length - 1) {
+          switchImage(0, 0);
+        }
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  });
 
   // Handling resize
   useEffect(() => {
@@ -42,7 +55,6 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
           ? containerRef.current?.clientWidth
           : 0
       );
-      setCurrentIndex(0);
       imagesControls.start({
         x: -imageWidth * currentIndex,
         transition: { type: 'tween', duration: 0 },
@@ -91,11 +103,12 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
 
   // Keyboard controls
   const keyHandler = (event: any) => {
-    if (hovered) {
+    if (hovered && images.length > 1) {
       if (event.code === 'ArrowRight') switchImage(1);
       if (event.code === 'ArrowLeft') switchImage(-1);
     }
   };
+
   document.onkeydown = keyHandler;
 
   // Touch controls
@@ -107,64 +120,77 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({
   };
 
   return (
-    <ImageSliderContainer
-      ref={containerRef}
-      onPanEnd={onPanEnd}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      $rounded={rounded}
-    >
-      <ImagesContainer
-        animate={imagesControls}
-        layout
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.1}
+    <ImagesSliderWrapper>
+      {images.length > 1 && (
+        <ImagesCounterContainer>
+          <AnimateSharedLayout>
+            {images.map((image, index) => (
+              <Fragment key={index}>
+                <ImagesCounterElement
+                  $width={imageWidth}
+                  onClick={() => switchImage(0, index)}
+                >
+                  {index === currentIndex && (
+                    <ImagesCounterElementOutline
+                      $width={imageWidth}
+                      layoutId="outline"
+                      initial={false}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                </ImagesCounterElement>
+              </Fragment>
+            ))}
+          </AnimateSharedLayout>
+        </ImagesCounterContainer>
+      )}
+
+      <ImageSliderContainer
+        ref={containerRef}
+        onPanEnd={onPanEnd}
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
+        $rounded={rounded}
       >
-        {images.map((image, index) => (
-          <Image
-            key={index}
-            onLoad={(e) => setImageWidth(e.currentTarget.clientWidth)}
-            src={image}
-            $heigth={imageWidth * (1 / aspectRatio)}
-          />
-        ))}
-      </ImagesContainer>
-      <PreviousImage
-        onClick={() => {
-          switchImage(-1);
-        }}
-      >
-        <CgArrowLeftR />
-      </PreviousImage>
-      <NextImage
-        onClick={() => {
-          switchImage(1);
-        }}
-      >
-        <CgArrowRightR />
-      </NextImage>
-      <ImagesCounterContainer>
-        <AnimateSharedLayout>
+        <ImagesContainer
+          animate={imagesControls}
+          layout
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+        >
           {images.map((image, index) => (
-            <Fragment key={index}>
-              <ImagesCounterElement
-                $width={imageWidth}
-                onClick={() => switchImage(0, index)}
-              >
-                {index === currentIndex && (
-                  <ImagesCounterElementOutline
-                    $width={imageWidth}
-                    layoutId="outline"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </ImagesCounterElement>
-            </Fragment>
+            <Image
+              key={index}
+              onLoad={(e) => setImageWidth(e.currentTarget.clientWidth)}
+              src={image}
+              $heigth={imageWidth * (1 / aspectRatio)}
+            />
           ))}
-        </AnimateSharedLayout>
-      </ImagesCounterContainer>
-    </ImageSliderContainer>
+        </ImagesContainer>
+        {images.length > 1 && (
+          <Fragment>
+            <PreviousImage
+              onClick={() => {
+                switchImage(-1);
+              }}
+            >
+              <CgArrowLeftR />
+            </PreviousImage>
+            <NextImage
+              onClick={() => {
+                switchImage(1);
+              }}
+            >
+              <CgArrowRightR />
+            </NextImage>
+          </Fragment>
+        )}
+      </ImageSliderContainer>
+    </ImagesSliderWrapper>
   );
 };
