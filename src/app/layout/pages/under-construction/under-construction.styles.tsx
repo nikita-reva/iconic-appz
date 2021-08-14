@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const Text = styled.h2`
   width: 100%;
+  font-family: var(--basic);
   font-size: 2.5rem;
   text-align: center;
   color: var(--iconic-darkblue);

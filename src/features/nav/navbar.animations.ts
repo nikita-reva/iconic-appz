@@ -4,15 +4,6 @@ export const logoHover = {
   scale: 1.04,
 };
 
-export const hamburgerHover = {
-  backgroundColor: 'var(--iconic-yellow)',
-  transition: {
-    type: 'spring',
-    ease: 'easeIn',
-    duration: 1,
-  },
-};
-
 // Variants
 export const navbarVariants = {
   visible: {
@@ -27,7 +18,7 @@ export const navbarVariants = {
 };
 
 export const barOneVariants = {
-  inactive: {
+  navClosed: {
     rotateZ: 0,
     y: 0,
     transition: {
@@ -36,7 +27,7 @@ export const barOneVariants = {
       stiffness: 200,
     },
   },
-  active: {
+  navOpen: {
     rotateZ: 45,
     y: 10,
     transition: {
@@ -48,7 +39,7 @@ export const barOneVariants = {
 };
 
 export const barTwoVariants = {
-  inactive: {
+  navClosed: {
     scaleX: 1,
     transition: {
       type: 'spring',
@@ -57,7 +48,7 @@ export const barTwoVariants = {
       stiffness: 120,
     },
   },
-  active: {
+  navOpen: {
     scaleX: 0,
     transition: {
       ease: 'linear',
@@ -67,7 +58,7 @@ export const barTwoVariants = {
 };
 
 export const barThreeVariants = {
-  inactive: {
+  navClosed: {
     rotateZ: 0,
     y: 0,
     transition: {
@@ -75,7 +66,7 @@ export const barThreeVariants = {
       stiffness: 200,
     },
   },
-  active: {
+  navOpen: {
     rotateZ: -45,
     y: -10,
     transition: {

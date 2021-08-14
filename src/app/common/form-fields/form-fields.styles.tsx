@@ -7,7 +7,7 @@ export const FormFieldContainer = styled.div`
 
 export const FormFieldLabel = styled.label`
   color: var(--iconic-blue);
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--basic);
   letter-spacing: 0.2px;
   font-size: 1rem;
   font-weight: 500;
@@ -24,13 +24,13 @@ export const CommonStyles = css`
   color: var(--iconic-darkblue);
   letter-spacing: 0.2px;
   font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--basic);
   transition: border 0.2s;
 
   &::placeholder {
     color: var(--iconic-darkblue);
     transition: color 0.2s;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--basic);
     letter-spacing: 0.1px;
     font-size: 0.8rem;
   }

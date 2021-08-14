@@ -6,7 +6,7 @@ const Message = styled.div`
   width: 100%;
   text-align: start;
   padding: 8px 0;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--basic);
   letter-spacing: 0.2px;
   font-size: 0.8rem;
   font-weight: 500;

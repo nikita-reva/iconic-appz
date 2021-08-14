@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export const ContactFormHeading = styled.h2`
   width: 100%;
   text-align: center;
-  font-family: 'Kaushan Script', sans-serif;
+  font-family: var(--caption);
   color: var(--iconic-paleblue);
 `;
 
@@ -28,6 +28,6 @@ export const Feedback = styled(motion.div)`
   width: 100%;
   margin-bottom: 12px;
   text-align: center;
-  font-family: 'Kaushan Script', sans-serif;
+  font-family: var(--caption);
   color: var(--iconic-green);
 `;

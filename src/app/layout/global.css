@@ -7,6 +7,7 @@
 }
 
 :root {
+  /* Colors */
   --iconic-red: #c65647;
   --iconic-pink: #ee7d76;
   --iconic-blue: #227da1;
@@ -19,6 +20,10 @@
   --iconic-orange: #f07637;
   --iconic-darkorange: #d46442;
   --iconic-lightorange: #d4842c;
+
+  /* Fonts */
+  --basic: 'Ubuntu', sans-serif;
+  --caption: 'Kaushan Script', sans-serif;
 }
 
 body {

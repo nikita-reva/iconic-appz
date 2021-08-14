@@ -52,7 +52,7 @@ export const GlassButtonContainer = styled.div<GlassButtonProps>`
 
 const ButtonStyles = css`
   position: absolute;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--basic);
   top: 0;
   left: 0;
   width: 100%;

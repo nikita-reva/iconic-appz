@@ -37,7 +37,7 @@ const IconicButtonStyles = css<StyleProps>`
     $btnLook === 'secondary' ? 'transparent' : $bgColor};
   color: ${({ $inverted }) =>
     $inverted ? 'var(--iconic-paleblue)' : 'var(--iconic-darkblue)'};
-  font-family: 'Ubuntu', sans-serif;
+  font-family: var(--basic);
   font-weight: ${({ $btnSize }) =>
     $btnSize === 'small'
       ? 500
