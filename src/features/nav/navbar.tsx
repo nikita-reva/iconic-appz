@@ -21,6 +21,7 @@ import {
   NavWrapper,
   NavSeparator,
   ActiveLinkMarker,
+  NavLinkContent,
 } from './navbar.styles';
 
 interface NavbarProps {}
@@ -130,8 +131,39 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
                   variants={navElementVariants}
                   onClick={() => setSelected(index)}
                 >
-                  {selected === index && <ActiveLinkMarker layoutId="marked" />}
-                  <NavLink to={link.to}>{link.title}</NavLink>
+                  {selected === index && (
+                    <ActiveLinkMarker
+                      transition={{ duration: 0.5 }}
+                      layoutId="marked"
+                    />
+                  )}
+                  <NavLink to={link.to}>
+                    <NavLinkContent
+                      initial={false}
+                      animate={
+                        selected === index
+                          ? {
+                              scale: 1.1,
+                              transition: {
+                                type: 'Tween',
+                                duration: 0.4,
+                                delay: 0.3,
+                                ease: 'easeInOut',
+                              },
+                            }
+                          : {
+                              scale: 1,
+                              transition: {
+                                type: 'Tween',
+                                duration: 0.1,
+                                ease: 'easeInOut',
+                              },
+                            }
+                      }
+                    >
+                      {link.title}
+                    </NavLinkContent>
+                  </NavLink>
                 </NavElement>
               ))}
             </AnimateSharedLayout>

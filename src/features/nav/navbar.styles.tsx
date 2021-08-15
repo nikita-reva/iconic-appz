@@ -139,6 +139,8 @@ export const NavLink = styled(Link)`
   }
 `;
 
+export const NavLinkContent = styled(motion.span)``;
+
 export const ActiveLinkMarker = styled(motion.div)`
   position: absolute;
   overflow: hidden;
@@ -163,43 +165,43 @@ export const ActiveLinkMarker = styled(motion.div)`
     width: 100%;
     height: 100%;
     opacity: 0.5;
-    background-image: linear-gradient(
-        306deg,
-        rgba(54, 54, 54, 0.05) 0%,
-        rgba(54, 54, 54, 0.05) 33.333%,
-        rgba(85, 85, 85, 0.05) 33.333%,
-        rgba(85, 85, 85, 0.05) 66.666%,
-        rgba(255, 255, 255, 0.05) 66.666%,
-        rgba(255, 255, 255, 0.05) 99.999%
+
+    background-image: radial-gradient(
+        circle at 40% 91%,
+        rgba(251, 251, 251, 0.04) 0%,
+        rgba(251, 251, 251, 0.04) 50%,
+        rgba(229, 229, 229, 0.04) 50%,
+        rgba(229, 229, 229, 0.04) 100%
       ),
-      linear-gradient(
-        353deg,
-        rgba(81, 81, 81, 0.05) 0%,
-        rgba(81, 81, 81, 0.05) 33.333%,
-        rgba(238, 238, 238, 0.05) 33.333%,
-        rgba(238, 238, 238, 0.05) 66.666%,
-        rgba(32, 32, 32, 0.05) 66.666%,
-        rgba(32, 32, 32, 0.05) 99.999%
+      radial-gradient(
+        circle at 66% 97%,
+        rgba(36, 36, 36, 0.04) 0%,
+        rgba(36, 36, 36, 0.04) 50%,
+        rgba(46, 46, 46, 0.04) 50%,
+        rgba(46, 46, 46, 0.04) 100%
       ),
-      linear-gradient(
-        140deg,
-        rgba(192, 192, 192, 0.05) 0%,
-        rgba(192, 192, 192, 0.05) 33.333%,
-        rgba(109, 109, 109, 0.05) 33.333%,
-        rgba(109, 109, 109, 0.05) 66.666%,
-        rgba(30, 30, 30, 0.05) 66.666%,
-        rgba(30, 30, 30, 0.05) 99.999%
+      radial-gradient(
+        circle at 86% 7%,
+        rgba(40, 40, 40, 0.04) 0%,
+        rgba(40, 40, 40, 0.04) 50%,
+        rgba(200, 200, 200, 0.04) 50%,
+        rgba(200, 200, 200, 0.04) 100%
       ),
-      linear-gradient(
-        189deg,
-        rgba(77, 77, 77, 0.05) 0%,
-        rgba(77, 77, 77, 0.05) 33.333%,
-        rgba(55, 55, 55, 0.05) 33.333%,
-        rgba(55, 55, 55, 0.05) 66.666%,
-        rgba(145, 145, 145, 0.05) 66.666%,
-        rgba(145, 145, 145, 0.05) 99.999%
+      radial-gradient(
+        circle at 15% 16%,
+        rgba(99, 99, 99, 0.04) 0%,
+        rgba(99, 99, 99, 0.04) 50%,
+        rgba(45, 45, 45, 0.04) 50%,
+        rgba(45, 45, 45, 0.04) 100%
       ),
-      linear-gradient(90deg, rgb(9, 201, 186), rgb(18, 131, 221));
+      radial-gradient(
+        circle at 75% 99%,
+        rgba(243, 243, 243, 0.04) 0%,
+        rgba(243, 243, 243, 0.04) 50%,
+        rgba(37, 37, 37, 0.04) 50%,
+        rgba(37, 37, 37, 0.04) 100%
+      ),
+      linear-gradient(90deg, rgb(34, 222, 237), rgb(135, 89, 215));
 
     @media only screen and (min-width: 1025px) {
       opacity: 0.3;
