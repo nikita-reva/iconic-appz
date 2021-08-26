@@ -1,5 +1,7 @@
 This project is going to be my personal portfolio website. 
 
+Deployed to Firebase [here](https://iconic-appz.web.app/)
+
 Tech stack:
 - Front-end: React with TypeScript
 - Back-end: Firebase
